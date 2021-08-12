@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Corona Virus Tracking Application</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+    <!-- This is how you add objects from the model to the html. Check thymeleaf doc for more ways to use it -->
+    <!-- <p th:text="${locationStats}"></p> -->
+
+    <div class="card text-white bg-danger mb-3" style="max-width: full">
+      <div class="card-header">Corona Virus Tracking Application</div>
+      <div class="card-body">
+        <div class="row align-items-start">
+          <div class="col">
+            <h6 class="card-title">
+              Latest Total Number Of Corona Virus Infections
+            </h6>
+            <h1 class="card-text" th:text="${totalReportedCasesToday}">
+              Today's Numbers Not Updated Yet
+            </h1>
+          </div>
+
+          <div class="col">
+            <h6 class="card-title">Total Delta Between Yesterday And Today</h6>
+            <h1 class="card-text" th:text="${totalDeltaCases}">
+              Today's Numbers Not Updated Yet
+            </h1>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- This is how you iterate over a iterable such as my listarray here. th:each="element : ${list}"-->
+      <table class="table">
+        <tr>
+          <th>State</th>
+          <th>Country</th>
+          <th>Total Cases Reported Today</th>
+          <th>Delta Between Total Cases Today And Yesterday</th>
+        </tr>
+        <tr th:each="locationStat : ${locationStats}">
+          <td th:text="${locationStat.state}"></td>
+          <td th:text="${locationStat.country}"></td>
+          <td th:text="${locationStat.latestTotalCases}">0</td>
+          <td th:text="${locationStat.diffFromLastDate}">0</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>
